@@ -100,3 +100,66 @@ Membuat tampilan item yang dapat diklik oleh pengguna dalam aplikasi dan ketika 
 
 - Menjawab beberapa pertanyaan berikut pada README.md pada root folder.
 - Melakukan add-commit-push ke GitHub.
+
+# TUGAS 8 - PBP
+
+1. Jelaskan perbedaan antara Navigator.push() dan Navigator.pushReplacement(), disertai dengan contoh mengenai penggunaan kedua metode tersebut yang tepat!
+Jawab: Metode push digunakan untuk menambahkan rute lain ke atas tumpukan screen (stack) saat ini. Halaman baru ditampilkan di atas halaman sebelumnya. Method ini menyebabkan route yang ditambahkan berada pada paling atas stack, sehingga route yang baru saja ditambahkan tersebut akan muncul dan ditampilkan kepada pengguna. Sedangkan Method pushReplacement() berfungsi untuk menggantikan route yang sedang terlihat oleh pengguna dengan sebuah route baru. Dengan menggunakan method ini, aplikasi akan beralih dari tampilan route yang sedang ditampilkan ke route yang baru ditentukan. Ketika digunakan pada stack route yang dikelola oleh Navigator, route yang sudah ada di atas stack akan langsung digantikan oleh route baru tanpa memengaruhi kondisi elemen stack yang berada di bawahnya.
+
+Contoh Navigator.push():
+Navigator.push(
+    context,
+   	MaterialPageRoute(builder: (context) {
+  		return AboutPage()
+  	})
+);
+
+Contoh Navigator.pushReplacement() :
+Navigator.pushReplacement(
+  context,
+  MaterialPageRoute(builder: (context) => DashboardScreen()),
+);
+
+
+sumber: https://belajarflutter.com/memahami-navigasi-routing-di-flutter/
+
+2. Jelaskan masing-masing layout widget pada Flutter dan konteks penggunaannya masing-masing!
+Jawab:
+- Container : Sebuah widget yang dapat menampung widget lainnya dan memberikan properti seperti padding, margin, dan sebagainya. Contoh penggunaannya adalah mengelilingi widget lain untuk menetapkan batas atau memberikan desain.
+- GridView : Meletakkan widget sebagai kisi yang dapat digulir. Contohnya adalah membuat tata letak grid dari widget.
+- ListView : Meletakkan widget sebagai daftar yang dapat digulir. Contoh penggunaannya adalah membuat daftar scrollable dari widget
+- Stack : Menumpuk widget anak satu di atas yang lain. Contoh penggunaannya adalah menata widget secara bersarang dan menumpuknya.
+- Column dan Row : Mengatur widget anak secara vertikal dan horizontal 
+
+
+Sumber : https://docs.flutter.dev/ui/layout
+
+3. Sebutkan apa saja elemen input pada form yang kamu pakai pada tugas kali ini dan jelaskan mengapa kamu menggunakan elemen input tersebut!
+Jawab: 
+- TextFormField untuk Nama Produk
+Digunakan untuk mengumpulkan informasi tentang nama produk. Mendukung validasi apakah input tidak boleh kosong.
+
+- TextFormField untuk Jumlah Produk:
+Digunakan untuk mengumpulkan informasi tentang jumlah produk. Mengkonversi input menjadi tipe data integer untuk keperluan penyimpanan.
+
+- TextFormField untuk Deskripsi Produk:
+Digunakan untuk mengumpulkan informasi tentang deskripsi produk. Memastikan deskripsi tidak boleh kosong.
+
+4. Bagaimana penerapan clean architecture pada aplikasi Flutter?
+Jawab: Clean Architecture membantu dalam memisahkan logika bisnis dari kode yang terkait dengan platform seperti UI, manajemen status, dan sumber daya eksternal. Selain itu, penerapan clean architecture memungkinkan kode yang kita hasilkan menjadi lebih mudah diuji secara independen.
+
+Sumber : https://aditya-rohman.medium.com/mengembangkan-aplikasi-flutter-dengan-proses-test-driven-development-tdd-dan-mengadopsi-clean-29d29bb0702b
+
+5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step! (bukan hanya sekadar mengikuti tutorial)
+Jawab:
+- Menambahkan drawer menu untuk navigasi
+Buka proyek sebelumnya, buat berkas baru dengan nama left_drawer.dart di dalam direktori baru widgets dan tambahkan beberap kode. Tambahkan import untuk halaman-halaman yang akan dimasukkan navigasinya ke dalam drawer menu, lalu masukkan routing untuk halaman yang diimpor. Kemudian tambahkan drawer header.
+
+- Menambahkan form dan elemen input
+Buat berkas baru pada direktori lib dengan nama shoplist_form.dart dan tambahkan kode. Ubah widget Placeholder dengan potongan kode, buat variabel baru bernama _formkey, atribut key akan berfungsi sebagai handler dari form state, validasi form, dan penyimpanan form. Isi widget Form dengan field dan buat widget Column sebagai child dari SingleChildScrollView. Buat widget TextFormField lalu tambahkan atribut crossAxisAlignment. Buat TextFormField dan buat tombol sebagai child dari column.
+
+- Memberikan fungsionalitas dari tombol Tambah Item
+Tambahkan beberapa kode dari Navigator.push di mana ketika tombol Tambah Item ditekan makan akan menampilkan tampilan menambahkan item/produk
+
+- Membuat refactoring files 
+- Melakukan add-commit-push ke GitHub.
