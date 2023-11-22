@@ -1,17 +1,21 @@
-import 'package:flutter/material.dart';
-import 'package:exoplanet_mobile/model/Item.dart'; // Pastikan import model item
-import 'package:exoplanet_mobile/widgets/left_drawer.dart';
-import 'package:exoplanet_mobile/screens/shoplist_form.dart';
-import 'package:exoplanet_mobile/screens/menu.dart';
+import 'dart:convert';
 
-class AddProductForm extends StatefulWidget {
-  const AddProductForm({super.key});
+import 'package:flutter/material.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
+import 'package:exoplanet_mobile/screens/list_product.dart';
+import 'package:exoplanet_mobile/screens/menu.dart';
+import 'package:exoplanet_mobile/widgets/left_drawer.dart';
+import 'package:exoplanet_mobile/model/Item.dart';
+
+class AddItemForm extends StatefulWidget {
+  const AddItemForm({super.key});
 
   @override
-  State<AddProductForm> createState() => _AddItemState();
+  State<AddItemForm> createState() => _AddItemState();
 }
 
-class _AddItemState extends State<AddProductForm> {
+class _AddItemState extends State<AddItemForm> {
   final _formKey = GlobalKey<FormState>();
   String _name = "";
   int _amount = 0;
@@ -19,11 +23,12 @@ class _AddItemState extends State<AddProductForm> {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
         title: const Center(
           child: Text(
-            "TAMBAH PRODUK",
+            "TAMBAH ITEM",
           ),
         ),
         backgroundColor: Colors.black87,
@@ -43,8 +48,8 @@ class _AddItemState extends State<AddProductForm> {
                 padding: const EdgeInsets.all(8),
                 child: TextFormField(
                   decoration: InputDecoration(
-                      hintText: "Nama Produk",
-                      labelText: "Nama Produk",
+                      hintText: "Nama Item",
+                      labelText: "Nama Item",
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5))),
                   // isi dari formnya
@@ -65,8 +70,8 @@ class _AddItemState extends State<AddProductForm> {
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
                   decoration: InputDecoration(
-                    hintText: "Jumlah Produk",
-                    labelText: "Jumlah Produk",
+                    hintText: "Jumlah Item",
+                    labelText: "Jumlah Item",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),
@@ -80,10 +85,10 @@ class _AddItemState extends State<AddProductForm> {
                   },
                   validator: (String? value) {
                     if (value == null || value.isEmpty) {
-                      return "Jumlah produk tidak boleh kosong";
+                      return "Jumlah tidak boleh kosong";
                     }
                     if (int.tryParse(value) == null) {
-                      return "Jumlah produk harus berupa bilangan";
+                      return "Jumlah tidak boleh kosong";
                     }
                     return null;
                   },
@@ -125,38 +130,35 @@ class _AddItemState extends State<AddProductForm> {
                       "Save",
                       style: TextStyle(color: Colors.white),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        //masukin item ke listitem
-                        Item isi = Item(_name, _amount, _description);
-                        Item.listItem.add(isi);
-                        // print(Item.listItem);
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                title: const Text("Produk Berhasil Disimpan!"),
-                                content: SingleChildScrollView(
-                                  child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text('Nama: $_name'),
-                                        Text('Jumlah Produk: $_amount'),
-                                        Text('Deskripsi: $_description'),
-                                      ]),
-                                ),
-                                actions: [
-                                  TextButton(
-                                    child: const Text("OK"),
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                  )
-                                ],
-                              );
-                            });
-                        _formKey.currentState!.reset();
+                        // Kirim ke Django dan tunggu respons
+                        // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
+                        final response = await request.postJson(
+                            "https://aulia-rizqi21-tugas.pbp.cs.ui.ac.id/create-flutter/",
+                            jsonEncode(<String, String>{
+                              'name': _name,
+                              'amount': _amount.toString(),
+                              'description': _description,
+                              // TODO: Sesuaikan field data sesuai dengan aplikasimu
+                            }));
+                        if (response['status'] == 'success') {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                            content: Text("Item baru berhasil disimpan!"),
+                          ));
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MyHomePage()),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                            content:
+                                Text("Terdapat kesalahan, silakan coba lagi."),
+                          ));
+                        }
                       }
                     },
                   ),

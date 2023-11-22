@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:exopalent_mobile/screens/add_product.dart';
+import 'package:exoplanet_mobile/screens/list_product.dart';
 import 'package:exoplanet_mobile/screens/menu.dart';
-import 'package:exoplanet_mobile/screens/add_product.dart';
-import 'package:exoplanet_mobile/screens/shoplist_form.dart';
-// TODO: Impor halaman ShopFormPage jika sudah dibuat
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
@@ -17,7 +16,7 @@ class LeftDrawer extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  "EXOPLANET SHOPPP",
+                  "THIS IS QEMULSHOP",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 30,
@@ -27,7 +26,7 @@ class LeftDrawer extends StatelessWidget {
                 ),
                 Padding(padding: EdgeInsets.all(10)),
                 Text(
-                  "Cari kpopstuff mu di exoplanet shop!!",
+                  "Cari Keperluan Favoritemu Disini!!!",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 15,
@@ -55,7 +54,7 @@ class LeftDrawer extends StatelessWidget {
             // ketika diklik akan ke forms add_item
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const AddProductForm()));
+                  MaterialPageRoute(builder: (context) => const AddItemForm()));
             },
           ),
           ListTile(
@@ -64,10 +63,8 @@ class LeftDrawer extends StatelessWidget {
 
             // ketika diklik akan ke list item
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const ItemListPage()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const ItemPage()));
             },
           ),
         ],

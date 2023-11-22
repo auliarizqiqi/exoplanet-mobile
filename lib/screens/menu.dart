@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:exoplanet_mobile/model/Item.dart';
-import 'package:exoplanet_mobile/screens/shoplist_form.dart';
+import 'package:exoplanet_mobile/screens/list_product.dart';
 import 'package:exoplanet_mobile/widgets/shop_card.dart';
 import 'package:exoplanet_mobile/widgets/left_drawer.dart';
 
@@ -8,9 +8,9 @@ class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key}) : super(key: key);
 
   final List<ShopItem> items = [
-    ShopItem("Lihat Item", Icons.checklist, Colors.red),
-    ShopItem("Tambah Item", Icons.add_shopping_cart, Colors.blue),
-    ShopItem("Logout", Icons.logout, Colors.green),
+    ShopItem("Lihat Item", Icons.checklist, Colors.black87),
+    ShopItem("Tambah Item", Icons.add_shopping_cart, Colors.black54),
+    ShopItem("Logout", Icons.logout, Colors.black45),
   ];
 
   @override
@@ -19,11 +19,11 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Center(
           child: Text(
-            'EXOPLANET SHOPPP',
+            'EXOPLANET SHOP',
             style: TextStyle(color: Colors.white),
           ),
         ),
-        backgroundColor: Colors.yellow,
+        backgroundColor: Colors.black87,
         foregroundColor: Colors.white,
       ),
       drawer: const LeftDrawer(),
