@@ -1,26 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:pbp_django_auth/pbp_django_auth.dart';
-import 'package:provider/provider.dart';
+import 'package:exoplanet_mobile/screens/add_product.dart';
 import 'package:exoplanet_mobile/screens/list_product.dart';
 import 'package:exoplanet_mobile/screens/login.dart';
-import 'package:exoplanet_mobile/screens/menu.dart';
-import '../screens/add_product.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
-class ShopItem {
+
+class MenuItem {
   final String name;
   final IconData icon;
   final Color color;
-  ShopItem(this.name, this.icon, this.color);
+
+  MenuItem(this.name, this.icon, this.color);
 }
+class MenuCard extends StatelessWidget {
+  final MenuItem item;
 
-class ShopCard extends StatelessWidget {
-  final ShopItem item;
-
-  const ShopCard(this.item, {super.key}); // Constructor
+  const MenuCard(this.item, {super.key}); // Constructor
 
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
+
     return Material(
       color: item.color,
       child: InkWell(
@@ -31,16 +32,26 @@ class ShopCard extends StatelessWidget {
             ..hideCurrentSnackBar()
             ..showSnackBar(SnackBar(
                 content: Text("Kamu telah menekan tombol ${item.name}!")));
-          if (item.name == "Tambah Item") {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const AddItemForm()));
-          } else if (item.name == "Lihat Item") {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const ItemPage()));
+
+          if (item.name == "Show Items") {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ItemsPage(),
+                ));
+          }
+          // Navigate ke route yang sesuai (tergantung jenis tombol)
+          else if (item.name == "Add Items") {
+            // Melakukan navigasi ke MaterialPageRoute yang mencakup ShopFormPage.
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ItemFormPage(),
+              ),
+            );
           } else if (item.name == "Logout") {
             final response = await request.logout(
-                // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
-                "https://aulia-rizqi21-tugas.pbp.cs.ui.ac.id/auth/logout/");
+                "http://127.0.0.1:8000/auth/logout/");
             String message = response["message"];
             if (response['status']) {
               String uname = response["username"];
@@ -68,7 +79,7 @@ class ShopCard extends StatelessWidget {
                 Icon(
                   item.icon,
                   color: Colors.white,
-                  size: 100.0,
+                  size: 30.0,
                 ),
                 const Padding(padding: EdgeInsets.all(3)),
                 Text(
