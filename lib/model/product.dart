@@ -33,37 +33,33 @@ class Product {
 }
 
 class Fields {
-    String name;
-    int amount;
-    String description;
-    int price;
-    String category;
     int user;
+    String name;
+    int price;
+    String description;
+    int amount;
 
     Fields({
+        required this.user,
         required this.name,
         required this.amount,
-        required this.description,
         required this.price,
-        required this.category,
-        required this.user,
+        required this.description,
     });
 
     factory Fields.fromJson(Map<String, dynamic> json) => Fields(
+        user: json["user"],
         name: json["name"],
         amount: json["amount"],
-        description: json["description"],
         price: json["price"],
-        category: json["category"],
-        user: json["user"],
+        description: json["description"],
     );
 
     Map<String, dynamic> toJson() => {
+        "user": user,
         "name": name,
         "amount": amount,
-        "description": description,
         "price": price,
-        "category": category,
-        "user": user,
+        "description": description,
     };
 }

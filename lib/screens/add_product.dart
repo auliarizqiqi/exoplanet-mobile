@@ -16,7 +16,6 @@ class ItemFormPage extends StatefulWidget {
 class _ItemFormPageState extends State<ItemFormPage> {
   final _formKey = GlobalKey<FormState>();
   String _name = "";
-  String _category = "";
   int _amount = 0;
   int _price = 0;
   String _description = "";
@@ -33,7 +32,7 @@ class _ItemFormPageState extends State<ItemFormPage> {
             style: TextStyle(color: Colors.white),
           ),
         ),
-        backgroundColor: Colors.pink,
+        backgroundColor: Colors.red,
         foregroundColor: Colors.white,
       ),
       drawer: const LeftDrawer(),
@@ -65,41 +64,13 @@ class _ItemFormPageState extends State<ItemFormPage> {
                 },
                 validator: (String? value) {
                   if (value == null || value.isEmpty) {
-                    return "Name cannot be empty!";
+                    return "Nama tidak boleh kosong";
                   }
                   return null;
                 },
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                decoration: InputDecoration(
-                  hintText: "Category",
-                  labelText: "Category",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5.0),
-                  ),
-                ),
-                onChanged: (String? value) {
-                  setState(() {
-                    _category = value!;
-                  });
-                },
-                onSaved: (String? value) {
-                  setState(() {
-                    // Menambahkan variabel yang sesuai
-                    _category = value!;
-                  });
-                },
-                validator: (String? value) {
-                  if (value == null || value.isEmpty) {
-                    return "Category cannot be empty!";
-                  }
-                  return null;
-                },
-              ),
-            ),
+            
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
@@ -117,10 +88,10 @@ class _ItemFormPageState extends State<ItemFormPage> {
                 },
                 validator: (String? value) {
                   if (value == null || value.isEmpty) {
-                    return "Amount cannot be empty!";
+                    return "Jumlah tidak boleh kosong";
                   }
                   if (int.tryParse(value) == null) {
-                    return "Amount must be a valid integer!";
+                    return "Jumlah harus bilangan bulat";
                   }
                   return null;
                 },
@@ -143,10 +114,10 @@ class _ItemFormPageState extends State<ItemFormPage> {
                 },
                 validator: (String? value) {
                   if (value == null || value.isEmpty) {
-                    return "Price cannot be empty!";
+                    return "Harga tidak boleh kosong";
                   }
                   if (int.tryParse(value) == null) {
-                    return "Price must be a valid integer!";
+                    return "Harga harus bilangan bulat";
                   }
                   return null;
                 },
@@ -176,7 +147,7 @@ class _ItemFormPageState extends State<ItemFormPage> {
                 },
                 validator: (String? value) {
                   if (value == null || value.isEmpty) {
-                    return "Description cannot be empty!";
+                    return "Deskripsi tidak boleh kosong";
                   }
                   return null;
                 },
@@ -188,7 +159,7 @@ class _ItemFormPageState extends State<ItemFormPage> {
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.pink),
+                    backgroundColor: MaterialStateProperty.all(Colors.red),
                   ),
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
@@ -198,7 +169,6 @@ class _ItemFormPageState extends State<ItemFormPage> {
                           "http://127.0.0.1:8000/create-flutter/",
                           jsonEncode(<String, String>{
                             'name': _name,
-                            'category': _category,
                             'amount': _amount.toString(),
                             'price': _price.toString(),
                             'description': _description,

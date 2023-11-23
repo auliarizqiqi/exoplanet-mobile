@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
             child: MaterialApp(
                 title: 'Exoplanet Shop',
                 theme: ThemeData(
-                    colorScheme: ColorScheme.fromSeed(seedColor: Colors.pink),
+                    colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
                     useMaterial3: true,
             ),
             home: LoginPage(),

@@ -16,7 +16,7 @@ class LoginApp extends StatelessWidget {
         return MaterialApp(
             title: 'Login',
             theme: ThemeData(
-                primarySwatch: Colors.pink,
+                primarySwatch: Colors.red,
             ),
             home: const LoginPage(),
         );
@@ -43,7 +43,8 @@ class _LoginPageState extends State<LoginPage> {
             'Login',
             style: TextStyle(color: Colors.white),
             ),
-            backgroundColor: Colors.pinkAccent,
+            backgroundColor: Colors.red
+            ,
             foregroundColor: Colors.white,
         ),
         body: Container(
@@ -55,9 +56,9 @@ class _LoginPageState extends State<LoginPage> {
                 controller: _usernameController,
                 decoration: const InputDecoration(
                     labelText: 'Username',
-                    labelStyle: TextStyle(color: Colors.pink),
+                    labelStyle: TextStyle(color: Colors.red),
                     focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.pink),
+                    borderSide: BorderSide(color: Colors.red),
                     ),
                 ),
                 ),
@@ -66,9 +67,9 @@ class _LoginPageState extends State<LoginPage> {
                 controller: _passwordController,
                 decoration: const InputDecoration(
                     labelText: 'Password',
-                    labelStyle: TextStyle(color: Colors.pink),
+                    labelStyle: TextStyle(color: Colors.red),
                     focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.pink),
+                    borderSide: BorderSide(color: Colors.red),
                     ),
                 ),
                 obscureText: true,

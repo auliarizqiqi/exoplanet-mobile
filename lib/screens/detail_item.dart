@@ -14,7 +14,7 @@ class DetailItemPage extends StatelessWidget {
           '${item.fields.name}',
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: Colors.pinkAccent,
+        backgroundColor: Colors.red,
         foregroundColor: Colors.white,
       ),
       body: Padding(
@@ -26,8 +26,7 @@ class DetailItemPage extends StatelessWidget {
               item.fields.name,
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            const SizedBox(height: 10),
-            Text("Category: ${item.fields.category}"),
+
             const SizedBox(height: 10),
             Text("Amount : ${item.fields.amount}"),
             const SizedBox(height: 10),

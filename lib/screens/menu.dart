@@ -6,9 +6,9 @@ class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key}) : super(key: key);
 
   final List<MenuItem> items = [
-    MenuItem("Show Items", Icons.checklist, Colors.pink.shade800),
-    MenuItem("Add Items", Icons.add_shopping_cart, Colors.pink.shade300),
-    MenuItem("Logout", Icons.logout, Colors.redAccent.shade700),
+    MenuItem("Show Items", Icons.checklist, Colors.pinkAccent),
+    MenuItem("Add Items", Icons.add_shopping_cart, Colors.pinkAccent),
+    MenuItem("Logout", Icons.logout, Colors.pinkAccent),
   ];
 
   @override
@@ -19,7 +19,7 @@ class MyHomePage extends StatelessWidget {
         title: const Text(
           'EXOPLANET SHOP',
         ),
-        backgroundColor: Colors.pink,
+        backgroundColor: Colors.red,
         foregroundColor: Colors.white,
       ),
       drawer: const LeftDrawer(),

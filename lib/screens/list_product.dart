@@ -35,7 +35,7 @@ class _ItemsPageState extends State<ItemsPage> {
           'Items',
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: Colors.pinkAccent,
+        backgroundColor: Colors.red,
         foregroundColor: Colors.white,
       ),
       drawer: const LeftDrawer(),
@@ -84,9 +84,7 @@ class _ItemsPageState extends State<ItemsPage> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            const SizedBox(height: 10),
-                            Text(
-                                "Category : ${snapshot.data![index].fields.category}"),
+                            
                             const SizedBox(height: 10),
                             Text(
                                 "Amount : ${snapshot.data![index].fields.amount}")

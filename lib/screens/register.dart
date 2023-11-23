@@ -15,7 +15,7 @@ class RegisterApp extends StatelessWidget {
     return MaterialApp(
       title: 'Register',
       theme: ThemeData(
-        primarySwatch: Colors.pink,
+        primarySwatch: Colors.red,
       ),
       home: const RegisterPage(),
     );
@@ -44,7 +44,7 @@ class _RegisterPageState extends State<RegisterPage> {
           'Register',
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: Colors.pinkAccent,
+        backgroundColor: Colors.pink,
         foregroundColor: Colors.white,
       ),
       body: Container(
@@ -56,9 +56,9 @@ class _RegisterPageState extends State<RegisterPage> {
               controller: _usernameController,
               decoration: const InputDecoration(
                 labelText: 'Username',
-                labelStyle: TextStyle(color: Colors.pink),
+                labelStyle: TextStyle(color: Colors.purple),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.pink),
+                  borderSide: BorderSide(color: Colors.purple),
                 ),
               ),
             ),
@@ -67,9 +67,9 @@ class _RegisterPageState extends State<RegisterPage> {
               controller: _passwordController,
               decoration: const InputDecoration(
                 labelText: 'Password',
-                labelStyle: TextStyle(color: Colors.pink),
+                labelStyle: TextStyle(color: Colors.purple),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.pink),
+                  borderSide: BorderSide(color: Colors.purple),
                 ),
               ),
               obscureText: true,
@@ -79,9 +79,9 @@ class _RegisterPageState extends State<RegisterPage> {
               controller: _passwordConfirmationController,
               decoration: const InputDecoration(
                 labelText: 'Password Verification',
-                labelStyle: TextStyle(color: Colors.pink),
+                labelStyle: TextStyle(color: Colors.purple),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.pink),
+                  borderSide: BorderSide(color: Colors.purple),
                 ),
               ),
               obscureText: true,
