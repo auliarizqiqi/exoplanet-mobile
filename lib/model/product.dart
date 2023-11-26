@@ -9,7 +9,7 @@ List<Product> productFromJson(String str) => List<Product>.from(json.decode(str)
 String productToJson(List<Product> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class Product {
-    String model;
+    Model model;
     int pk;
     Fields fields;
 
@@ -20,13 +20,13 @@ class Product {
     });
 
     factory Product.fromJson(Map<String, dynamic> json) => Product(
-        model: json["model"],
+        model: modelValues.map[json["model"]]!,
         pk: json["pk"],
         fields: Fields.fromJson(json["fields"]),
     );
 
     Map<String, dynamic> toJson() => {
-        "model": model,
+        "model": modelValues.reverse[model],
         "pk": pk,
         "fields": fields.toJson(),
     };
@@ -35,31 +35,59 @@ class Product {
 class Fields {
     int user;
     String name;
+    DateTime dateAdded;
+    int amount;
     int price;
     String description;
-    int amount;
+    String size;
 
     Fields({
         required this.user,
         required this.name,
+        required this.dateAdded,
         required this.amount,
         required this.price,
         required this.description,
+        required this.size,
     });
 
     factory Fields.fromJson(Map<String, dynamic> json) => Fields(
         user: json["user"],
         name: json["name"],
+        dateAdded: DateTime.parse(json["date_added"]),
         amount: json["amount"],
         price: json["price"],
         description: json["description"],
+        size: json["size"],
     );
 
     Map<String, dynamic> toJson() => {
         "user": user,
         "name": name,
+        "date_added": "${dateAdded.year.toString().padLeft(4, '0')}-${dateAdded.month.toString().padLeft(2, '0')}-${dateAdded.day.toString().padLeft(2, '0')}",
         "amount": amount,
         "price": price,
         "description": description,
+        "size": size,
     };
+}
+
+enum Model {
+    MAIN_PRODUCT
+}
+
+final modelValues = EnumValues({
+    "main.product": Model.MAIN_PRODUCT
+});
+
+class EnumValues<T> {
+    Map<String, T> map;
+    late Map<T, String> reverseMap;
+
+    EnumValues(this.map);
+
+    Map<T, String> get reverse {
+        reverseMap = map.map((k, v) => MapEntry(v, k));
+        return reverseMap;
+    }
 }
